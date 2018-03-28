@@ -1,0 +1,12 @@
+var
+  i, N: integer;
+ 
+begin
+  i := 1;
+  readln(N);
+  for i to N do
+  begin
+    write(i, ' ');
+    Inc(i);
+  end;
+end.
