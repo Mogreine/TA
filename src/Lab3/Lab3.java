@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 
 public class Lab3 {
 
-    public class EquationParser {
+    public static class EquationParser {
         public String equation;
         private StringBuilder equationPA;
 
@@ -59,6 +59,11 @@ public class Lab3 {
             return true;
         }
 
+    }
+
+    public static void main(String[] args) {
+        EquationParser eq = new EquationParser("2 + 2)");
+        System.out.print(eq .parseEquation());
     }
 
 }
