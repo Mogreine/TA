@@ -14,40 +14,34 @@ public class Lab2 {
             //S1
             if (!validation(input)) {
                 out.write("Данные введены некорректно");
-
-                //S0
             }
             else {
                 String res = "";
 
                 //S2
-                switch (input.substring(0, 2)) {
-                    case "10":
-                        res = Integer.toBinaryString(Integer.parseInt(input.substring(2, 34), 2) * Integer.parseInt(input.substring(34), 2));
 
-                        //S3
-                        break;
-                    case "01":
-                        res = Integer.toBinaryString(Integer.parseInt(input.substring(2, 34), 2) / Integer.parseInt(input.substring(34), 2));
-
-                        //S4
-                        break;
+                if (input.substring(0, 2).equals("10")) {
+                    res = Integer.toBinaryString(Integer.parseInt(input.substring(2, 34), 2) * Integer.parseInt(input.substring(34), 2));
+                }
+                else {
+                    res = Integer.toBinaryString(Integer.parseInt(input.substring(2, 34), 2) / Integer.parseInt(input.substring(34), 2));
                 }
                 while (res.length() < 32) {
                     res = "0" + res;
                 }
                 out.write(res);
 
-                //S5
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         //S0
+
     }
 
-    static boolean validation(String str) {
+    private static boolean validation(String str) {
         if (str.length() != 66) {
             return false;
         }
