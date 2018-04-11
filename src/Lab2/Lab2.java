@@ -18,15 +18,13 @@ public class Lab2 {
 
             //S1
 
-            System.out.print(String.format("S1 input = %s\n", input));
+            System.out.print(String.format("S1 input = %s res = null\n", input));
             if (!validation(input)) {
                 out.write("Данные введены некорректно");
             }
             else {
 
                 //S2
-
-                System.out.print(String.format("S2 input = %s, res = null\n", input));
 
                 if (input.substring(0, 2).equals("10")) {
                     res = Integer.toBinaryString(Integer.parseInt(input.substring(2, 34), 2) * Integer.parseInt(input.substring(34), 2));
