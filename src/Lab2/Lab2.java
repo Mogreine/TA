@@ -1,6 +1,7 @@
 package Lab2;
 
 import java.io.*;
+import java.util.StringTokenizer;
 
 public class Lab2 {
 
@@ -19,13 +20,11 @@ public class Lab2 {
             //S1
 
             System.out.print(String.format("S1 input = %s res = null\n", input));
-            if (!validation(input)) {
-                out.write("Данные введены некорректно");
+            String validation = validation(input);
+            if (validation != null) {
+                out.write(validation);
             }
             else {
-
-                //S2
-
                 if (input.substring(0, 2).equals("10")) {
                     res = Integer.toBinaryString(Integer.parseInt(input.substring(2, 34), 2) * Integer.parseInt(input.substring(34), 2));
                 }
@@ -47,17 +46,17 @@ public class Lab2 {
 
     }
 
-    private static boolean validation(String str) {
+    private static String validation(String str) {
         if (str.length() != 66) {
-            return false;
+            return "Длина операндов неверная.";
         }
         if (str.substring(0, 2).compareTo("10") != 0 && str.substring(0, 2).compareTo("01") != 0) {
-            return false;
+            return "Операторы введены неверно.";
         }
         if (!str.matches("^[0-1]+$")) {
-            return false;
+            return "Операнды введены не в двоичном виде.";
         }
-        return true;
+        return null;
     }
 
 

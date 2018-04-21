@@ -1,6 +1,5 @@
 package Lab3;
 
-import java.io.BufferedReader;
 import java.util.HashMap;
 import java.util.Stack;
 import java.util.StringTokenizer;
@@ -32,8 +31,13 @@ public class Lab3 {
             while (elems.hasMoreTokens() && isCorrect) {
                 tmp = elems.nextToken();
                 if (tmp.charAt(0) >= '0' && tmp.charAt(0) <= '9') {
-                    equationPA.append(tmp).append(" ");
-                    numbersCount++;
+                    if (Double.parseDouble(tmp) > 255.0) {
+                        isCorrect = false;
+                    }
+                    else {
+                        equationPA.append(tmp).append(" ");
+                        numbersCount++;
+                    }
                 }
                 else if (priority.containsKey(tmp)) {
                     if (tmp.equals("(")) {
@@ -117,7 +121,7 @@ public class Lab3 {
     }
 
     public static void main(String[] args) {
-        String equation = "2.5 + 2.5 * 2";
+        String equation = "255.5 - 2.5 * 2";
         EquationParser eq = new EquationParser(equation);
         System.out.print(eq.getResult());
     }
