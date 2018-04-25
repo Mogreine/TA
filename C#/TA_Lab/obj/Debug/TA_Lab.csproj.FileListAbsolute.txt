@@ -1,0 +1,14 @@
+C:\Users\Admin\Documents\Visual Studio 2017\Projects\TA_Lab\TA_Lab\bin\Debug\TA_Lab.exe.config
+C:\Users\Admin\Documents\Visual Studio 2017\Projects\TA_Lab\TA_Lab\bin\Debug\TA_Lab.exe
+C:\Users\Admin\Documents\Visual Studio 2017\Projects\TA_Lab\TA_Lab\bin\Debug\TA_Lab.pdb
+C:\Users\Admin\Documents\Visual Studio 2017\Projects\TA_Lab\TA_Lab\obj\Debug\TA_Lab.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\Visual Studio 2017\Projects\TA_Lab\TA_Lab\obj\Debug\TA_Lab.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\Visual Studio 2017\Projects\TA_Lab\TA_Lab\obj\Debug\TA_Lab.exe
+C:\Users\Admin\Documents\Visual Studio 2017\Projects\TA_Lab\TA_Lab\obj\Debug\TA_Lab.pdb
+V:\GitLib\TA\C#\TA_Lab\bin\Debug\TA_Lab.exe.config
+V:\GitLib\TA\C#\TA_Lab\bin\Debug\TA_Lab.exe
+V:\GitLib\TA\C#\TA_Lab\bin\Debug\TA_Lab.pdb
+V:\GitLib\TA\C#\TA_Lab\obj\Debug\TA_Lab.csprojResolveAssemblyReference.cache
+V:\GitLib\TA\C#\TA_Lab\obj\Debug\TA_Lab.csproj.CoreCompileInputs.cache
+V:\GitLib\TA\C#\TA_Lab\obj\Debug\TA_Lab.exe
+V:\GitLib\TA\C#\TA_Lab\obj\Debug\TA_Lab.pdb
