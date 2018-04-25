@@ -1,6 +1,5 @@
 package Lab3;
 
-import java.io.BufferedReader;
 import java.util.HashMap;
 import java.util.Stack;
 import java.util.StringTokenizer;
@@ -16,7 +15,7 @@ public class Lab3 {
             equationPA = new StringBuilder();
         }
 
-        public boolean parseEquation() {
+        private boolean parseEquation() {
             StringTokenizer elems = new StringTokenizer(equation, " ");
             String tmp;
             int numbersCount = 0;
