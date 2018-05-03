@@ -14,22 +14,24 @@ namespace TA_Lab
 
         public ArithmeticEquation(string equation)
         {
-            this.equation = equation;
+            this.equation = equation.Trim();
             equationPA = new StringBuilder();
         }
 
-        public Boolean ParseEquation()
+        private Boolean ParseEquation()
         {
             string[] elems = equation.Split(' ');
             string tmp;
             int numbersCount = 0;
             int operationCount = 0;
-            Dictionary<string, int> priority = new Dictionary<string, int>();
-            priority["*"] = 3;
-            priority["/"] = 3;
-            priority["+"] = 2;
-            priority["-"] = 2;
-            priority["("] = 1;
+            Dictionary<string, int> priority = new Dictionary<string, int>()
+            {
+                ["*"] = 3,
+                ["/"] = 3,
+                ["+"] = 2,
+                ["-"] = 2,
+                ["("] = 1
+            };
             Stack<string> op = new Stack<string>();
             Boolean isCorrect = true;
             //while (elems.hasMoreTokens() && isCorrect)

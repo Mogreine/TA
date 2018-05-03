@@ -22,21 +22,30 @@ namespace TA_Lab
             Input = new List<string>();
             Patterns = new Dictionary<string, string>()
             {
-                {"init", @"^double [a-z]+ = \d+\.\d+$" },
-                {"def", @"^double [a-z]+$" },
-                {"print", @"^print\((.)+\)$" },
-                {"scan", @"^scan\((.)+\)$" },
-                {"equation", @"^[a-z]+ = .+$" }
+                { "if", @"^if\s?\(([a-z]+|(\d+\.\d+))\s?(<|>|<=|>=|==)\s?([a-z]+|(\d+\.\d+))\):$" },
+                { "else", @"^else:$" },
+                { "init", @"^double [a-z]+ = \d+\.\d+$" },
+                { "def", @"^double [a-z]+$" },
+                { "print", @"^print\((.)+\)$" },
+                { "scan", @"^scan\((.)+\)$" },
+                { "equation", @"^[a-z]+ = .+$" }
             };
         }
 
         public void Parse()
         {
             int error = 0;
+            bool? condition = null;
+            //bool afterIf = false;
             for (int i = 0; i < Program.Count; i++)
             {
                 error = 0;
                 String line = Program[i];
+                if (condition != null)
+                {
+                    IfElseSkipping(ref line, ref condition, ref i);
+                }
+                line = line.Trim('\t');
                 if (Regex.IsMatch(line, Patterns["init"]))
                 {
                     ParseInit(line);
@@ -44,6 +53,14 @@ namespace TA_Lab
                 else if (Regex.IsMatch(line, Patterns["def"]))
                 {
                     ParseDef(line);
+                }
+                else if (error == 0 && Regex.IsMatch(line, Patterns["if"]))
+                {
+                    bool? res = GetLogicResult(line);
+                    if (res == null)
+                        error = i + 1;
+                    else
+                        condition = res;                    
                 }
                 else if (error == 0 && Regex.IsMatch(line, Patterns["print"]))
                 {
@@ -76,6 +93,33 @@ namespace TA_Lab
             }
         }
 
+        private void IfElseSkipping(ref string line, ref bool? condition, ref int i)
+        {
+            if (condition.Value == false)
+            {
+                while (!Regex.IsMatch(line, Patterns["else"]))
+                {
+                    line = Program[++i];
+                }
+                condition = null;
+                line = Program[++i];
+            }
+            else
+            {
+                if (line[0] != '\t')
+                {
+                    if (Regex.IsMatch(line, Patterns["else"]))
+                    {
+                        i++;
+                        while ((line = Program[i])[0] == '\t')
+                            i++;
+                    }
+                    else
+                        condition = null;
+                }
+            }
+        }
+
         private int ParseInit(String line)
         {
             String[] str = line.Split(' ');
@@ -89,6 +133,56 @@ namespace TA_Lab
             return 0;
         }
 
+        private int ParseIf(String line, int i)
+        {
+            bool? res = GetLogicResult(line);
+            
+
+            return 0;
+        }
+
+        private bool? GetLogicResult(string line)
+        {
+            string inside = new Regex(@"(.+)").Match(line).Value.Trim(new char[] { '(', ')' });
+
+            var vars = new Regex(@"[a-z]+").Matches(line);
+            foreach (var match in vars)
+            {
+                if (match.ToString() == "if") continue;
+                if (Vars.ContainsKey(match.ToString()))
+                    inside.Replace(match.ToString(), Vars[match.ToString()].ToString());
+                else
+                    return null;
+            }
+            string sign = new Regex(@"((<=)|(>=)|==|>|<)").Match(inside).Value;
+            var numsMatches = new Regex(@"\d+\.\d+").Matches(inside);
+            List<double> nums = new List<double>(2);
+            foreach (var num in numsMatches)
+            {
+                nums.Add(Double.Parse(num.ToString(), CultureInfo.InvariantCulture));
+            }
+            bool result = false;
+            switch (sign)
+            {
+                case "<":
+                    result = nums[0] < nums[1];
+                    break;
+                case ">":
+                    result = nums[0] > nums[1];
+                    break;
+                case "<=":
+                    result = nums[0] <= nums[1];
+                    break;
+                case ">=":
+                    result = nums[0] >= nums[1];
+                    break;
+                case "==":
+                    result = nums[0] == nums[1];
+                    break;
+            }
+            return result;
+        }
+
         private int ParsePrint(String line, int i)
         {
             int error = 0;
@@ -99,11 +193,11 @@ namespace TA_Lab
                 String smth = match.ToString().Trim(new char[] { '(', ')' });  // .substring(match.start() + 1, match.end());
                 if (Vars.ContainsKey(smth))
                 {
-                    Console.Write(Vars[smth]);
+                    Console.WriteLine(Vars[smth]);
                 }
                 else if (Regex.IsMatch(smth, "\\d+\\.\\d+"))
                 {
-                    Console.Write(smth);
+                    Console.WriteLine(smth);
                 }
                 else
                 {
